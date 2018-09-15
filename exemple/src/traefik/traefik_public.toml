@@ -1,0 +1,46 @@
+debug = true
+logLevel = "INFO"
+
+defaultEntryPoints = ["https","http"]
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
+  [entryPoints.traefik]
+  address = ":8080"
+    [entryPoints.traefik.auth]
+      [entryPoints.traefik.auth.basic]
+      # User: test Pass: test
+      users = ["test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/"]
+
+# log to stdout by default
+[accessLog]
+
+# retry failed 3 times
+[retry]
+  attempts = 3
+
+[acme]
+email = "myemail@gmail.com"
+storage = "acme.json"
+entryPoint = "https"
+onHostRule = true
+acmeLogging = true
+OnHostRule = true
+  [acme.dnsChallenge]
+  provider = "ovh"
+  delayBeforeCheck = 0
+  [[acme.domains]]
+  main = "mydomain.com"
+
+[api]
+  entryPoint = "traefik"
+  dashboard = true
+
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+watch = true
+exposedByDefault = false

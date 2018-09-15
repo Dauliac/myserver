@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  wordpress:
+    container_name: ${WP_NAME}
+    image: wordpress:${WP_IMAGE}
+    restart: unless-stopped
+    volumes:
+      - ${WP_CORE}:/var/www/html
+      - ${WP_CONTENT}:/var/www/html/wp-content
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:mysite.com
+      - traefik.docker.network=FOLDERNAME_frontend
+      - traefik.port=80
+    environment:
+      - WORDPRESS_DB_HOST=${MYSQL_NAME}:3306
+      - WORDPRESS_DB_NAME=${WP_DB}
+      - WORDPRESS_DB_USER=${WP_DB_USER}
+      - WORDPRESS_DB_PASSWORD=${WP_DB_PASSWORD}
+      - WORDPRESS_TABLE_PREFIX=${WP_TABLE_PREFIX}
+    ports:
+      - ${WP_HTTP_PORT}:80
+      - ${WP_HTTPS_PORT}:443
+    networks:
+      - FOLDERNAME_backend
+      - FOLDERNAME_frontend
+
+networks:
+  common_backend:
+    external: true
+  common_frontend:
+    external: true
