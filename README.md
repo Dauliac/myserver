@@ -9,7 +9,7 @@ My own docker-compose: Traeefik/nextcloud/wordpress infrastructure
 - git clone
 
 ### Config
-Copy the `*_public.*` files to `*.*` files from `./exemple` and fill them
+Copy file from exemple and fill them:
 - Add SQL user and passwords in `src/mysql/default.sql`
 - Add SQL user and passwords in `.env`
 - Fill .env
