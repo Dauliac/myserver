@@ -15,6 +15,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ${TRAEFIK_TOML}:/traefik.toml:ro
       - ${TRAEFIK_ACME}:/acme.json
+      - ${TRAEFIK_HTPASSWD}:/etc/.htpasswd
     networks:
       - frontend
     environment:

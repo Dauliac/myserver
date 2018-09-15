@@ -14,8 +14,11 @@ Copy file from exemple and fill them:
 - Add SQL user and passwords in `.env`
 - Fill .env
 - Update traefik api password with:
+    ```
+      htpasswd -bc ./src/traefik/htpasswd USER PASSWORD
+    ```
 
-###
+### Start
 Start docker-compose.yml:
 ```
     docker-compose up
