@@ -1,4 +1,4 @@
-# cloud
+# MyServer
 My own docker-compose: Traeefik/nextcloud/wordpress infrastructure
 
 ## Getting started
